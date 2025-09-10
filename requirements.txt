@@ -1,0 +1,6 @@
+fastapi[all] 
+python-multipart 
+PyMuPDF 
+Pillow 
+requests 
+reportlab
