@@ -1,6 +1,7 @@
 import os
 import shutil
 import fitz  # PyMuPDF
+import hashlib #hash
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from pydantic import BaseModel, Field
 from typing import List
@@ -9,8 +10,8 @@ import uvicorn
 # Initialize the FastAPI app
 app = FastAPI(
     title="PDF Parsing API",
-    description="Upload a PDF to extract text and images.",
-    version="1.0.0",
+    description="Upload a PDF to extract text and images with hashed filenames.",
+    version="2.1.0",
 )
 
 # Pydantic model 
@@ -18,12 +19,10 @@ class PDFParseResponse(BaseModel):
     message: str = Field(..., description="A status message confirming the outcome.")
     filename: str = Field(..., description="The original name of the uploaded file.")
     extracted_text: str = Field(..., description="All the text extracted from the PDF.")
-    extracted_images: List[str] = Field(..., description="A list of filenames for the extracted images.")
+    extracted_images: List[str] = Field(..., description="A list of hashed filenames for any extracted images.")
 
 # Define the folder for temporary uploads and extracted images
 UPLOAD_FOLDER = "temp_uploads"
-
-
 
 # Helper Functions
 
@@ -33,6 +32,10 @@ async def startup_event():
     if os.path.exists(UPLOAD_FOLDER):
         shutil.rmtree(UPLOAD_FOLDER)
     os.makedirs(UPLOAD_FOLDER)
+
+def hash_image_bytes(image_bytes: bytes) -> str:
+    """Generates a SHA256 hash for a given byte string."""
+    return hashlib.sha256(image_bytes).hexdigest()
 
 
 # API Endpoints
@@ -73,14 +76,19 @@ async def upload_and_parse_pdf(file: UploadFile = File(...)):
                 image_bytes = base_image["image"]
                 image_ext = base_image["ext"]
                 
-                # Create a unique filename for each image
-                image_filename = f"image_p{page_num + 1}_{img_index + 1}.{image_ext}"
-                image_save_path = os.path.join(UPLOAD_FOLDER, image_filename)
+                # Hash
+                image_hash = hash_image_bytes(image_bytes)
+                hashed_filename = f"{image_hash}.{image_ext}"
+                image_save_path = os.path.join(UPLOAD_FOLDER, hashed_filename)
                 
-                with open(image_save_path, "wb") as img_file:
-                    img_file.write(image_bytes)
+                # Save the image only if it doesn't already exist 
+                if not os.path.exists(image_save_path):
+                    with open(image_save_path, "wb") as img_file:
+                        img_file.write(image_bytes)
                 
-                image_files.append(image_filename)
+                # Add the hashed name to the list
+                if hashed_filename not in image_files:
+                    image_files.append(hashed_filename)
 
         doc.close()
 
@@ -100,7 +108,7 @@ async def upload_and_parse_pdf(file: UploadFile = File(...)):
             os.remove(temp_pdf_path)
 
 
-# Run using "uvicorn parser:app --host 0.0.0.0 --port 8000 --reload"
+# Run using "uvicorn parser:app --reload"
 # or "python parser.py" for local testing
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=8000)
