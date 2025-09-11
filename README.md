@@ -1,4 +1,4 @@
-# EduVid AI: PDF Notes to Video Summaries
+# Notes to Videos
 
 A hackathon project for HackMIT that transforms PDF notes into short, engaging educational videos using AI-generated scripts, voiceovers, and visuals.
 
