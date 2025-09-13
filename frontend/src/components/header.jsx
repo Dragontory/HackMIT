@@ -7,15 +7,13 @@ const Header = ({ onBack }) => {
     if (onBack) {
       onBack();
     } else {
-      const el = document.getElementById('home');
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      else window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
   return (
     <header className="sticky top-0 z-50 border-b border-slate-800 bg-slate-900/70 backdrop-blur">
-      <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8 py-4 flex items-center justify-between">
+      <div className="font-roboto mx-auto max-w-6xl px-4 md:px-6 lg:px-8 py-4 flex items-center justify-between">
         <a
           href="#home"
           onClick={goHome}

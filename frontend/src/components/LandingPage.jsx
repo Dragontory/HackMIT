@@ -7,7 +7,7 @@ const LandingPage = ({ onTryNow }) => (
     <Header />
 
     {/* Hero */}
-    <main id="home" className="text-center py-20 md:py-32 px-4 md:px-8">
+    <main id="home" className="scroll-mt-none text-center py-20 md:py-32 px-4 md:px-8">
       <div className="max-w-4xl mx-auto animate-fade-up">
         <h2 className="text-5xl md:text-7xl font-extrabold tracking-tight">
           Transform Your Notes into
@@ -116,7 +116,7 @@ const LandingPage = ({ onTryNow }) => (
     </section>
 
     {/* See it in action (video placeholder) */}
-    <section id="demo" className="py-24 px-4 md:px-8 scroll-mt-header">
+    <section id="demo" className="py-24 px-4 md:px-8 scroll-mt-header-tight">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-10">
           <h3 className="text-4xl font-extrabold tracking-tight">See it in action</h3>

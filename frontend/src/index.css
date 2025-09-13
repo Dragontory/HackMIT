@@ -76,6 +76,14 @@ body {
   animation-delay: 120ms;     
 }
 
+:root { --header-h: 64px; }
+
+.scroll-mt-header { scroll-margin-top: calc(var(--header-h) + 8px); }
+
+.scroll-mt-header-tight { scroll-margin-top: calc(var(--header-h) - 8px); }
+
+.scroll-mt-none { scroll-margin-top: 0; }
+
 
 
 
