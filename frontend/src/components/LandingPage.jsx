@@ -4,12 +4,11 @@ import TiltCard from './TiltCard';
 
 const LandingPage = ({ onTryNow }) => (
   <>
-    {/* Header with better edge padding and clickable brand handled in Header.jsx */}
     <Header />
 
     {/* Hero */}
-    <main className="text-center py-20 md:py-32 px-4 md:px-8">
-      <div className="max-w-4xl mx-auto">
+    <main id="home" className="text-center py-20 md:py-32 px-4 md:px-8">
+      <div className="max-w-4xl mx-auto animate-fade-up">
         <h2 className="text-5xl md:text-7xl font-extrabold tracking-tight">
           Transform Your Notes into
           <span className="gradient-text block mt-2 md:mt-4">Engaging Video Lessons</span>
