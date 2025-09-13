@@ -98,14 +98,22 @@ const Uploader = () => {
             </div>
 
             <div className="mt-8 bg-slate-800 border border-slate-700 rounded-xl p-6 flex items-center justify-between">
-                <div>
-                    <h3 className="font-bold text-lg text-white">Go Deeper</h3>
-                    <p className="text-slate-400 text-sm">Let the AI research topics to provide more context.</p>
-                </div>
-                <div className="relative inline-block w-14 mr-2 align-middle select-none transition duration-200 ease-in">
-                    <input type="checkbox" name="toggle" id="go-deeper-toggle" checked={goDeeper} onChange={() => setGoDeeper(!goDeeper)} className="toggle-checkbox absolute block w-7 h-7 rounded-full bg-white border-4 appearance-none cursor-pointer"/>
-                    <label htmlFor="go-deeper-toggle" className="toggle-label block overflow-hidden h-7 rounded-full bg-slate-600 cursor-pointer"></label>
-                </div>
+            <div>
+                <h3 className="font-bold text-lg text-white">Go Deeper</h3>
+                <p className="text-slate-400 text-sm">Let the AI research topics to provide more context.</p>
+            </div>
+
+                <label htmlFor="go-deeper-toggle" className="relative inline-flex items-center w-14 h-7 cursor-pointer">
+                    <input
+                    id="go-deeper-toggle"
+                    type="checkbox"
+                    className="sr-only peer"
+                    checked={goDeeper}
+                    onChange={() => setGoDeeper(!goDeeper)}
+                    />
+                    <span className="absolute inset-0 rounded-full bg-slate-600 transition-colors peer-checked:bg-sky-500" />
+                    <span className="absolute left-1 top-1 h-5 w-5 rounded-full bg-white transition-transform duration-200 transform-gpu peer-checked:translate-x-7" />
+                </label>
             </div>
 
             <div className="mt-8 text-center">

@@ -1,23 +1,50 @@
 import React from 'react';
 
 /** @param {{ onBack?: () => void }} props */
-const Header = ({ onBack }) => (
-  <header className="py-6 flex justify-between items-center">
-    <h1 className="text-2xl font-bold gradient-text">ClarifY</h1>
-    <nav>
-      {onBack ? (
-        <button onClick={onBack} className="text-slate-300 hover:text-white transition">
-          &larr; Back to Home
-        </button>
-      ) : (
-        <ul className="flex gap-6 text-slate-300">
-          <li><a href="#about" className="hover:text-white transition">About</a></li>
-          <li><a href="#why" className="hover:text-white transition">Why ClarifY</a></li>
-          <li><a href="#demo" className="hover:text-white transition">Demo</a></li>
-        </ul>
-      )}
-    </nav>
-  </header>
-);
+const Header = ({ onBack }) => {
+  const goHome = (e) => {
+    e.preventDefault();
+    // If we're on the product page, use onBack to return to landing
+    if (onBack) {
+      onBack();
+    } else {
+      // Already on landing—just scroll to top smoothly
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  return (
+    <header className="sticky top-0 z-50 border-b border-slate-800 bg-slate-900/70 backdrop-blur">
+      <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8 py-4 flex items-center justify-between">
+        <a
+          href="#"
+          onClick={goHome}
+          className="text-2xl font-extrabold gradient-text leading-none focus:outline-none focus:ring focus:ring-sky-500/40 rounded"
+          aria-label="Go to home"
+        >
+          ClarifY
+        </a>
+
+        <nav>
+          {onBack ? (
+            <button
+              onClick={onBack}
+              className="text-slate-300 hover:text-white transition focus:outline-none focus:ring focus:ring-sky-500/30 rounded px-3 py-1"
+            >
+              &larr; Back to Home
+            </button>
+          ) : (
+            <ul className="flex items-center gap-6 text-slate-300">
+              <li><a href="#about" className="hover:text-white transition px-1 py-1 rounded focus:outline-none focus:ring focus:ring-sky-500/30">About</a></li>
+              <li><a href="#why" className="hover:text-white transition px-1 py-1 rounded focus:outline-none focus:ring focus:ring-sky-500/30">Why ClarifY</a></li>
+              <li><a href="#demo" className="hover:text-white transition px-1 py-1 rounded focus:outline-none focus:ring focus:ring-sky-500/30">Demo</a></li>
+            </ul>
+          )}
+        </nav>
+      </div>
+    </header>
+  );
+};
 
 export default Header;
+
