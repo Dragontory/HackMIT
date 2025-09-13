@@ -1,4 +1,5 @@
 fastapi[all] 
+uvicorn[standard]
 python-multipart 
 PyMuPDF 
 Pillow 

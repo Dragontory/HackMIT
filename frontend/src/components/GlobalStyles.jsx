@@ -1,7 +1,8 @@
 import React from 'react';
 
+// This component injects the global, non-Tailwind styles into your app.
 const GlobalStyles = () => (
-    <style jsx global>{`
+    <style>{`
         body {
             font-family: 'Inter', sans-serif;
             background-color: #0F172A; /* Slate 900 */
@@ -24,10 +25,6 @@ const GlobalStyles = () => (
         .toggle-checkbox:checked {
             right: 0;
             border-color: #38bdf8;
-            transform: translateX(1.75rem); /* Moves the circle inside the toggle */
-        }
-        .toggle-checkbox {
-            transition: transform 0.2s ease-in-out;
         }
         .toggle-checkbox:checked + .toggle-label {
             background-color: #38bdf8;

@@ -1,24 +1,31 @@
 /* src/index.css */
 @import "tailwindcss";
 
-/* Your custom global styles below */
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: 'Inter', sans-serif;
   background-color: #0F172A;
   color: #F8FAFC;
   overflow-x: hidden;
 }
+
 .gradient-text {
   background: linear-gradient(to right, #38bdf8, #818cf8, #c084fc);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
 .main-button { transition: all 0.3s ease; }
+
 .main-button:hover {
   transform: translateY(-2px);
   box-shadow: 0 10px 15px -3px rgba(56,189,248,0.2),
               0 4px 6px -2px rgba(56,189,248,0.1);
 }
+
 .toggle-checkbox { transition: transform 0.2s ease-in-out; }
 .toggle-checkbox:checked { right: 0; border-color: #38bdf8; transform: translateX(1.75rem); }
 .toggle-checkbox:checked + .toggle-label { background-color: #38bdf8; }
