@@ -1,46 +1,36 @@
-from pydantic_settings import BaseSettings
-from pydantic import AnyHttpUrl, Field
+from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic import Field
 
 
 class Settings(BaseSettings):
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        case_sensitive=True,
+        extra="ignore",  # allow ANTHROPIC_* env vars without crashing
+    )
+
     app_name: str = "AI Content Processing API"
-    app_version: str = "1.4.0"
-
+    app_version: str = "3.0.0"
     host: str = "0.0.0.0"
-    port: int = 8001
+    port: int = 8011
 
-    # LLM
-    llm_base_url: AnyHttpUrl = Field(default="http://127.0.0.1:8009/v1")
-    llm_model: str = "meta-llama/Meta-Llama-3.1-8B-Instruct"
+    anthropic_api_key: str | None = None
+    anthropic_base_url: str = Field(default="https://api.anthropic.com")
+    anthropic_model: str = Field(default="claude-3-5-sonnet-20240620")
+    anthropic_version: str = Field(default="2023-06-01")
+
+    llm_timeout_s: float = 60.0
     llm_temperature: float = 0.2
-    llm_timeout_s: float = 90.0
-    llm_max_tokens: int = 1024
-    lora_name: str | None = None  # e.g., "mylora" when serving adapters
+    llm_max_tokens: int = 2000  # client can compute a lower dynamic budget per request
 
-    clip_model_name: str = "ViT-B-32"
-    clip_pretrained: str = "openai"
-    clip_threshold: float = 0.20
-    clip_topk: int = 24
-
-    # Limits (able ro be overridden by policy.py)
-    max_json_chars: int = 20000
+    max_json_chars: int = 20_000
     max_relevant_images: int = 24
-    words_per_minute: int = 130
-    seconds_per_image: int = 7
-    max_image_bonus: int = 10
+    words_per_minute: int = 115
+    seconds_per_image: int = 8
+    max_image_bonus: int = 24
+    min_floor_sec: int = 20
 
-    # Cleaning heuristics
-    header_footer_hit_ratio: float = 0.5
-
-    # Default policy mode: "static" | "adaptive" | "learned"
-    policy_mode: str = "adaptive"
-
-    # Where parser saves images (used if resolving sha256 -> path)
     image_folder: str = "temp_uploads"
-
-    class Config:
-        env_file = ".env"
-        case_sensitive = True
 
 
 settings = Settings()
