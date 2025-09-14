@@ -10,6 +10,7 @@ import uvicorn
 import imagehash
 from PIL import Image
 import io
+from fastapi.staticfiles import StaticFiles
 
 # Initialize the FastAPI app
 app = FastAPI(
@@ -35,6 +36,12 @@ app.add_middleware(
     allow_headers=["*"], # Allows all headers
 )
 
+# --- Static Files for Images ---
+UPLOAD_FOLDER = "temp_uploads"
+
+# Mount the temp_uploads folder to serve static files
+app.mount("/temp_uploads", StaticFiles(directory=UPLOAD_FOLDER), name="temp_uploads")
+
 # --- Pydantic Models ---
 class PDFParseResponse(BaseModel):
     message: str = Field(..., description="A status message confirming the outcome.")
@@ -56,8 +63,6 @@ def get_perceptual_hash(image_bytes: bytes) -> str:
     """Calculates the pHash of an image from its bytes."""
     try:
         image = Image.open(io.BytesIO(image_bytes))
-        # Use phash (perceptual hash) as it's a good all-rounder.
-        # The hash is returned as a string.
         return str(imagehash.phash(image))
     except Exception as e:
         print(f"Warning: Could not hash an image. Error: {e}")
