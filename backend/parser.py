@@ -11,6 +11,9 @@ import imagehash
 from PIL import Image
 import io
 from fastapi.staticfiles import StaticFiles
+from auth_routes import router as auth_router
+from video_routes import router as videos_router
+from database import engine, Base
 
 # Initialize the FastAPI app
 app = FastAPI(
@@ -19,28 +22,31 @@ app = FastAPI(
     version="1.1.0",
 )
 
+# Include routers for auth and videos
+app.include_router(auth_router)
+app.include_router(videos_router)
+
 # --- CRITICAL: ADD CORS MIDDLEWARE ---
-# This allows your React frontend (running on a different port)
-# to make requests to this backend.
 origins = [
-    "http://localhost:5173", # The default Vite dev server port
+    "http://localhost:5173",  
     "http://127.0.0.1:5173",
-    "http://localhost:3000", # A common alternative
+    "http://localhost:3000",  
 ]
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["*"], # Allows all methods (GET, POST, etc.)
-    allow_headers=["*"], # Allows all headers
+    allow_methods=["*"],  # Allows all methods (GET, POST, etc.)
+    allow_headers=["*"],  # Allows all headers
 )
 
 # --- Static Files for Images ---
 UPLOAD_FOLDER = "temp_uploads"
-
-# Mount the temp_uploads folder to serve static files
 app.mount("/temp_uploads", StaticFiles(directory=UPLOAD_FOLDER), name="temp_uploads")
+
+# Ensure the database is initialized
+Base.metadata.create_all(bind=engine)
 
 # --- Pydantic Models ---
 class PDFParseResponse(BaseModel):

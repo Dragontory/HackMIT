@@ -1,7 +1,7 @@
 import React from 'react';
 
-/** @param {{ onBack?: () => void }} props */
-const Header = ({ onBack }) => {
+/** @param {{ onBack?: () => void, isLoggedIn?: boolean, onLogout?: () => void }} props */
+const Header = ({ onBack, isLoggedIn, onLogout }) => {
   const goHome = (e) => {
     e.preventDefault();
     if (onBack) {
@@ -33,10 +33,25 @@ const Header = ({ onBack }) => {
             </button>
           ) : (
             <ul className="flex items-center gap-6 text-slate-300">
-              <li><a href="#home"  className="hover:text-white transition px-1 py-1 rounded focus:outline-none focus:ring focus:ring-sky-500/30">Home</a></li>
+              <li><a href="#home" className="hover:text-white transition px-1 py-1 rounded focus:outline-none focus:ring focus:ring-sky-500/30">Home</a></li>
               <li><a href="#about" className="hover:text-white transition px-1 py-1 rounded focus:outline-none focus:ring focus:ring-sky-500/30">About</a></li>
-              <li><a href="#why"   className="hover:text-white transition px-1 py-1 rounded focus:outline-none focus:ring focus:ring-sky-500/30">Why ClarifY</a></li>
-              <li><a href="#demo"  className="hover:text-white transition px-1 py-1 rounded focus:outline-none focus:ring focus:ring-sky-500/30">Demo</a></li>
+              <li><a href="#why" className="hover:text-white transition px-1 py-1 rounded focus:outline-none focus:ring focus:ring-sky-500/30">Why ClarifY</a></li>
+              <li><a href="#demo" className="hover:text-white transition px-1 py-1 rounded focus:outline-none focus:ring focus:ring-sky-500/30">Demo</a></li>
+              {isLoggedIn && (
+                <li><a href="#my-videos" className="hover:text-white transition px-1 py-1 rounded focus:outline-none focus:ring focus:ring-sky-500/30">My Videos</a></li>
+              )}
+              {!isLoggedIn ? (
+                <li><a href="#login" className="hover:text-white transition px-1 py-1 rounded focus:outline-none focus:ring focus:ring-sky-500/30">Login</a></li>
+              ) : (
+                <li>
+                  <button
+                    onClick={onLogout}
+                    className="hover:text-white transition px-1 py-1 rounded focus:outline-none focus:ring focus:ring-sky-500/30"
+                  >
+                    Logout
+                  </button>
+                </li>
+              )}
             </ul>
           )}
         </nav>
@@ -46,5 +61,3 @@ const Header = ({ onBack }) => {
 };
 
 export default Header;
-
-

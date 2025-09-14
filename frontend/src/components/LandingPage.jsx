@@ -5,11 +5,12 @@ import LearningImpactChart from './LearningImpactChart';
 import Background from './Background';
 import demo1 from '../assets/demo1.gif';
 import demo2 from '../assets/demo2.gif';
+import Login from './Login';
 
 // Lazy load Notebook3D component
 const Notebook3D = lazy(() => import('./Notebook3D'));
 
-const LandingPage = ({ onTryNow }) => {
+const LandingPage = ({ onTryNow, onLogin }) => {
   const [currentGifIndex, setCurrentGifIndex] = useState(0);
   const gifs = [demo1, demo2];
 
@@ -239,6 +240,10 @@ const LandingPage = ({ onTryNow }) => {
       <footer className="text-center py-8 border-t border-slate-800">
         <p className="text-slate-400">&copy; 2025 ClarifY - A HackMIT Project.</p>
       </footer>
+
+      <div>
+        <Login onLogin={onLogin} /> {/* Ensure onLogin is passed here */}
+      </div>
     </>
   );
 };

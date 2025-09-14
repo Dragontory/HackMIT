@@ -7,3 +7,6 @@ requests
 reportlab
 imagehash
 modal
+passlib
+sqlalchemy
+pyjwt
