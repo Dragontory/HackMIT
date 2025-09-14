@@ -12,7 +12,7 @@ function App() {
     return (
         <>
             <GlobalStyles />
-            <div className="relative min-h-screen">
+            <div className="relative z-10 min-h-screen ">
                 <div className={`page ${currentPage === 'landing' ? '' : 'page-hidden'}`}>
                     <LandingPage onTryNow={showProductPage} />
                 </div>
