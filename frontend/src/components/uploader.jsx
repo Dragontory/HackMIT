@@ -33,6 +33,18 @@ const UploadIcon = () => (
   </svg>
 );
 
+// A more robust way to handle voice data with stable IDs
+const voices = [
+  { id: 'voice_alice', name: 'Alice', image: face1 },
+  { id: 'voice_bob', name: 'Bob', image: face2 },
+  { id: 'voice_charlie', name: 'Charlie', image: face3 },
+  { id: 'voice_dana', name: 'Dana', image: face4 },
+  { id: 'voice_eva', name: 'Eva', image: face5 },
+  { id: 'voice_frank', name: 'Frank', image: face6 },
+  { id: 'voice_grace', name: 'Grace', image: face7 },
+  { id: 'voice_hank', name: 'Hank', image: face8 },
+];
+
 const Uploader = () => {
   const [uploadedFile, setUploadedFile] = useState(null);
   const [error, setError] = useState("");
@@ -40,8 +52,8 @@ const Uploader = () => {
   const [isGenerating, setIsGenerating] = useState(false);
   const [goDeeper, setGoDeeper] = useState(false);
   const [extractedText, setExtractedText] = useState("");
-  const [imageHashes, setImageHashes] = useState([]);
-  const [selectedVoice, setSelectedVoice] = useState(null); // State for voice selection
+  const [imageFilenames, setImageFilenames] = useState([]);
+  const [selectedVoiceId, setSelectedVoiceId] = useState(null);
   const [uploading, setUploading] = useState(false);
 
   const handleFile = useCallback((file) => {
@@ -79,20 +91,24 @@ const Uploader = () => {
   };
 
   const handleGenerate = async () => {
-    if (uploadedFile && selectedVoice !== null) {
+    // Check for both a file and a selected voice
+    if (uploadedFile && selectedVoiceId) {
       setIsGenerating(true);
       setError("");
       setUploading(true);
       console.log("Generating video for:", uploadedFile.name);
-      console.log("Selected voice ID:", selectedVoice);
+      console.log("Selected voice ID:", selectedVoiceId);
 
-      // Create FormData and send to the backend API
+      // Create FormData to send to the backend
       const formData = new FormData();
       formData.append("file", uploadedFile);
-      formData.append("voice", selectedVoice); // Send selected voice to backend
+      // Append the selected voice ID to the form data
+      formData.append("voice", selectedVoiceId);
+      // Also append the "goDeeper" state
+      formData.append("goDeeper", goDeeper.toString());
 
       try {
-        // Send file to backend API
+        // Send the file and voice selection to the backend API
         const response = await fetch("http://127.0.0.1:8000/upload", {
           method: "POST",
           body: formData,
@@ -104,23 +120,24 @@ const Uploader = () => {
 
         const data = await response.json();
         setExtractedText(data.extracted_text);
-        setImageHashes(data.extracted_images);
+        setImageFilenames(data.extracted_images);
       } catch (err) {
         setError(err.message);
       } finally {
         setIsGenerating(false);
         setUploading(false);
       }
+    } else {
+        // This case handles if the button was somehow enabled without a voice
+        if (!selectedVoiceId) {
+            setError("Please select a voice before generating.");
+        }
     }
   };
 
   const dropZoneClasses = `bg-slate-800 border-2 border-dashed rounded-2xl p-8 text-center cursor-pointer transition-all duration-300 ${
     isDragOver ? "border-sky-500 bg-slate-700" : "border-slate-600"
   } ${error ? "border-red-500" : ""}`;
-
-  const voiceNames = [
-    "Alice", "Bob", "Charlie", "Dana", "Eva", "Frank", "Grace", "Hank"
-  ];
 
   return (
     <div className="w-full max-w-2xl">
@@ -163,7 +180,7 @@ const Uploader = () => {
         )}
         {error && (
           <div>
-            <p className="text-xl font-semibold text-red-400">Invalid file type</p>
+            <p className="text-xl font-semibold text-red-400">Error</p>
             <p className="text-slate-400 mt-2">{error}</p>
           </div>
         )}
@@ -174,36 +191,27 @@ const Uploader = () => {
         <h3 className="font-bold text-lg text-white">Choose Your Voice</h3>
         <p className="text-slate-400 text-sm">Pick a voice for the video narration.</p>
         <div className="grid grid-cols-4 gap-6 mt-4">
-          {[
-            face1,
-            face2,
-            face3,
-            face4,
-            face5,
-            face6,
-            face7,
-            face8,
-          ].map((face, index) => (
+          {voices.map((voice) => (
             <div
-              key={index}
-              className={`cursor-pointer p-4 rounded-lg transition-all duration-300 ${
-                selectedVoice === index
-                  ? "border-4 border-blue-500"
-                  : "border"
+              key={voice.id}
+              className={`cursor-pointer p-2 rounded-lg transition-all duration-300 transform hover:scale-105 ${
+                selectedVoiceId === voice.id
+                  ? "border-4 border-sky-500 scale-105"
+                  : "border-2 border-slate-700 hover:border-slate-500"
               }`}
               onClick={() => {
-                // Toggle selection on click (deselect if already selected)
-                setSelectedVoice(selectedVoice === index ? null : index);
+                // Toggle selection: if clicking the same voice, deselect it. Otherwise, select the new one.
+                setSelectedVoiceId(selectedVoiceId === voice.id ? null : voice.id);
               }}
             >
               <div className="relative">
                 <img
-                  src={face}
-                  alt={`Voice ${index + 1}`}
-                  className="w-full h-full object-contain rounded-xl"
+                  src={voice.image}
+                  alt={`Voice option: ${voice.name}`}
+                  className="w-full h-full object-contain rounded-md"
                 />
                 <div className="text-center mt-2 text-slate-300 font-semibold">
-                  {voiceNames[index]}
+                  {voice.name}
                 </div>
               </div>
             </div>
@@ -219,7 +227,6 @@ const Uploader = () => {
             Let the AI research topics to provide more context.
           </p>
         </div>
-
         <label
           htmlFor="go-deeper-toggle"
           className="relative inline-flex items-center w-14 h-7 cursor-pointer"
@@ -242,7 +249,7 @@ const Uploader = () => {
           id="generate-button"
           onClick={handleGenerate}
           className="w-full main-button bg-sky-500 hover:bg-sky-600 text-white font-bold py-4 px-10 rounded-full text-lg shadow-lg disabled:bg-slate-600 disabled:shadow-none disabled:cursor-not-allowed"
-          disabled={!uploadedFile || isGenerating || selectedVoice === null}
+          disabled={!uploadedFile || isGenerating || !selectedVoiceId}
         >
           {isGenerating ? "Generating..." : "Generate Video"}
         </button>
@@ -258,18 +265,20 @@ const Uploader = () => {
         </div>
       )}
 
-      {imageHashes.length > 0 && (
+      {imageFilenames.length > 0 && (
         <div className="mt-8">
           <h4 className="text-xl font-bold">Extracted Images:</h4>
-          <div className="grid grid-cols-2 gap-4 mt-4">
-            {imageHashes.map((hash) => (
-              <div key={hash} className="bg-gray-800 p-4 rounded-md">
-                <p className="text-sm text-gray-400">Image Hash: {hash}</p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mt-4">
+            {imageFilenames.map((filename) => (
+              <div key={filename} className="bg-slate-800 p-2 rounded-md">
+                {/* Use the full filename directly without adding ".png" */}
                 <img
-                  src={`http://127.0.0.1:8000/temp_uploads/${hash}.png`}
-                  alt={`Extracted image ${hash}`}
+                  src={`http://127.0.0.1:8000/temp_uploads/${filename}`}
+                  alt={`Extracted image ${filename}`}
                   className="mt-2 rounded-md"
+                   onError={(e) => { e.target.style.display = 'none'; }}
                 />
+                 <p className="text-xs text-slate-500 truncate mt-2">{filename}</p>
               </div>
             ))}
           </div>

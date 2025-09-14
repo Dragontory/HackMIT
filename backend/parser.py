@@ -2,7 +2,7 @@ import os
 import shutil
 import fitz  # PyMuPDF
 import hashlib
-from fastapi import FastAPI, File, UploadFile, HTTPException
+from fastapi import FastAPI, File, UploadFile, HTTPException, Form
 from fastapi.middleware.cors import CORSMiddleware # Import CORS Middleware
 from pydantic import BaseModel, Field
 from typing import List
@@ -71,7 +71,16 @@ def get_perceptual_hash(image_bytes: bytes) -> str:
 
 # --- API Endpoint ---
 @app.post("/upload", response_model=PDFParseResponse)
-async def upload_and_parse_pdf(file: UploadFile = File(...)):
+async def upload_and_parse_pdf(
+    file: UploadFile = File(...),
+    voice: str = Form(...),
+    goDeeper: str = Form(...)
+):
+
+    print(f"Received voice selection: {voice}")
+    print(f"Go Deeper option: {goDeeper}")
+
+
     if not file.filename.lower().endswith('.pdf'):
         raise HTTPException(status_code=400, detail="Invalid file type. Please upload a PDF.")
 
@@ -85,7 +94,7 @@ async def upload_and_parse_pdf(file: UploadFile = File(...)):
         # Parse the PDF
         doc = fitz.open(temp_pdf_path)
         full_text = ""
-        image_hashes = set() # Use a set to automatically handle duplicates
+        image_filenames = set() # Use a set to store full filenames
 
         for page in doc:
             full_text += page.get_text("text") + "\n\n"
@@ -95,13 +104,15 @@ async def upload_and_parse_pdf(file: UploadFile = File(...)):
                 base_image = doc.extract_image(xref)
                 image_bytes = base_image["image"]
                 
-                # Get the perceptual hash
                 p_hash = get_perceptual_hash(image_bytes)
                 
-                if p_hash not in image_hashes:
-                    image_hashes.add(p_hash)
-                    image_ext = base_image["ext"]
-                    image_save_path = os.path.join(UPLOAD_FOLDER, f"{p_hash}.{image_ext}")
+                image_ext = base_image["ext"]
+                image_filename = f"{p_hash}.{image_ext}"
+                
+                # Check if we've already processed an image with this content
+                if image_filename not in image_filenames:
+                    image_filenames.add(image_filename)
+                    image_save_path = os.path.join(UPLOAD_FOLDER, image_filename)
                     
                     # Save the image only if it doesn't already exist
                     if not os.path.exists(image_save_path):
@@ -114,7 +125,7 @@ async def upload_and_parse_pdf(file: UploadFile = File(...)):
             message="PDF processed successfully",
             filename=file.filename,
             extracted_text=full_text,
-            extracted_images=list(image_hashes),
+            extracted_images=list(image_filenames),
         )
 
     except Exception as e:
