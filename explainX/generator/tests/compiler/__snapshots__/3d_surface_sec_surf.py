@@ -1,0 +1,23 @@
+class Scene_Sec_Surf(ThreeDScene):
+    def construct(self):
+    import numpy as np
+
+    self.wait(0.500)
+    title = Text("3D Surface Visualization", font=BODY_FONT).scale(0.9).to_edge(UP)
+    self.play(Write(title))
+
+    self.wait(0.500)
+    axes = ThreeDAxes()
+    surface = Surface(
+        lambda u, v: np.array([u, v, np.sin(u)*np.cos(v)]),
+        u_range=[-3,3], v_range=[-3,3]
+    )
+    self.play(Create(axes))
+    self.play(Create(surface))
+
+    self.wait(0.500)
+    self.set_camera_orientation(phi=60*DEGREES, theta=30*DEGREES, distance=8.0)
+
+    self.wait(2.0)
+    # Pause for 2.0 seconds
+    self.wait(2.0)

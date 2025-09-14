@@ -1,0 +1,27 @@
+{
+  "scene_id": "simple_intro",
+  "timeline": [
+    {
+      "op": "title",
+      "text": "Welcome to ExplainX",
+      "pos": "center",
+      "anim": "write"
+    },
+    {
+      "op": "text", 
+      "text": "This is a simple example scene to test our compiler.",
+      "pos": "left",
+      "anim": "write"
+    },
+    {
+      "op": "eq",
+      "latex": "E = mc^2",
+      "pos": "center",
+      "anim": "write"
+    },
+    {
+      "op": "pause",
+      "seconds": 1.5
+    }
+  ]
+}

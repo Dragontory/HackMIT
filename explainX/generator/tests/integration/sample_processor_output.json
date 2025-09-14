@@ -1,0 +1,504 @@
+{
+  "video_metadata": {
+    "title": "Introduction to Machine Learning: Linear Regression",
+    "subject": "Computer Science",
+    "duration_estimate_minutes": 8,
+    "complexity_level": "intermediate",
+    "source_document": "ml_fundamentals_chapter3.pdf",
+    "generated_at": "2024-01-15T10:30:00Z"
+  },
+  "scenes": [
+    {
+      "scene_id": "intro_001",
+      "title": "Course Introduction",
+      "duration_s": 45,
+      "operations": [
+        {
+          "type": "title",
+          "content": "Machine Learning Fundamentals",
+          "subtitle": "Linear Regression Deep Dive",
+          "style": {
+            "title_font_size": 48,
+            "subtitle_font_size": 32,
+            "title_color": "#2E86AB",
+            "subtitle_color": "#A23B72"
+          }
+        },
+        {
+          "type": "text",
+          "content": "Welcome to our comprehensive guide on linear regression, one of the fundamental building blocks of machine learning.",
+          "position": "center",
+          "style": {
+            "font_size": 24,
+            "text_color": "#333333"
+          }
+        }
+      ]
+    },
+    {
+      "scene_id": "concept_002", 
+      "title": "What is Linear Regression?",
+      "duration_s": 60,
+      "operations": [
+        {
+          "type": "text",
+          "content": "Linear Regression",
+          "position": "top",
+          "style": {
+            "font_size": 36,
+            "text_color": "#2E86AB",
+            "font_weight": "bold"
+          }
+        },
+        {
+          "type": "text",
+          "content": "Linear regression is a statistical method used to model the relationship between a dependent variable and one or more independent variables.",
+          "position": "center",
+          "style": {
+            "font_size": 20,
+            "text_color": "#444444",
+            "max_width": 800
+          }
+        },
+        {
+          "type": "text",
+          "content": "Key Characteristics:",
+          "position": "left",
+          "style": {
+            "font_size": 24,
+            "text_color": "#A23B72",
+            "font_weight": "bold"
+          }
+        },
+        {
+          "type": "list",
+          "items": [
+            "Assumes a linear relationship between variables",
+            "Minimizes the sum of squared residuals",
+            "Provides interpretable coefficients",
+            "Foundation for more complex algorithms"
+          ],
+          "style": {
+            "bullet_style": "•",
+            "item_spacing": 8,
+            "font_size": 18,
+            "text_color": "#555555"
+          }
+        }
+      ]
+    },
+    {
+      "scene_id": "math_003",
+      "title": "Mathematical Foundation",
+      "duration_s": 75,
+      "operations": [
+        {
+          "type": "text",
+          "content": "The Linear Regression Equation",
+          "position": "top",
+          "style": {
+            "font_size": 32,
+            "text_color": "#2E86AB",
+            "font_weight": "bold"
+          }
+        },
+        {
+          "type": "math",
+          "expression": "y = \\beta_0 + \\beta_1 x_1 + \\beta_2 x_2 + ... + \\beta_n x_n + \\epsilon",
+          "position": "center",
+          "style": {
+            "font_size": 28,
+            "text_color": "#000000"
+          }
+        },
+        {
+          "type": "text",
+          "content": "Where:",
+          "position": "left",
+          "style": {
+            "font_size": 20,
+            "text_color": "#A23B72",
+            "font_weight": "bold"
+          }
+        },
+        {
+          "type": "list",
+          "items": [
+            "y = dependent variable (target)",
+            "β₀ = y-intercept (bias term)",
+            "β₁, β₂, ..., βₙ = coefficients (weights)",
+            "x₁, x₂, ..., xₙ = independent variables (features)",
+            "ε = error term (residual)"
+          ],
+          "style": {
+            "bullet_style": "→",
+            "item_spacing": 10,
+            "font_size": 16,
+            "text_color": "#444444"
+          }
+        }
+      ]
+    },
+    {
+      "scene_id": "cost_function_004",
+      "title": "Cost Function",
+      "duration_s": 90,
+      "operations": [
+        {
+          "type": "text",
+          "content": "Mean Squared Error (MSE)",
+          "position": "top",
+          "style": {
+            "font_size": 32,
+            "text_color": "#2E86AB",
+            "font_weight": "bold"
+          }
+        },
+        {
+          "type": "text",
+          "content": "Linear regression minimizes the Mean Squared Error to find the best-fitting line:",
+          "position": "center",
+          "style": {
+            "font_size": 20,
+            "text_color": "#444444"
+          }
+        },
+        {
+          "type": "math",
+          "expression": "MSE = \\frac{1}{n} \\sum_{i=1}^{n} (y_i - \\hat{y_i})^2",
+          "position": "center",
+          "style": {
+            "font_size": 32,
+            "text_color": "#A23B72"
+          }
+        },
+        {
+          "type": "math",
+          "expression": "\\hat{y_i} = \\beta_0 + \\beta_1 x_i",
+          "position": "center",
+          "style": {
+            "font_size": 24,
+            "text_color": "#000000"
+          }
+        },
+        {
+          "type": "text",
+          "content": "The goal is to find β₀ and β₁ that minimize this cost function.",
+          "position": "bottom",
+          "style": {
+            "font_size": 18,
+            "text_color": "#666666",
+            "style": "italic"
+          }
+        }
+      ]
+    },
+    {
+      "scene_id": "visualization_005",
+      "title": "Data Visualization",
+      "duration_s": 80,
+      "operations": [
+        {
+          "type": "text",
+          "content": "Sample Dataset: House Prices vs Size",
+          "position": "top",
+          "style": {
+            "font_size": 28,
+            "text_color": "#2E86AB",
+            "font_weight": "bold"
+          }
+        },
+        {
+          "type": "graph2d",
+          "title": "House Price Prediction",
+          "x_label": "House Size (sq ft)",
+          "y_label": "Price ($1000s)",
+          "data": {
+            "scatter": [
+              [1200, 180], [1500, 230], [1800, 280], [2100, 320],
+              [2400, 380], [2700, 420], [3000, 480], [3300, 520],
+              [1300, 190], [1600, 240], [1900, 290], [2200, 340],
+              [2500, 390], [2800, 440], [3100, 490], [3400, 540]
+            ],
+            "regression_line": {
+              "slope": 0.15,
+              "intercept": 50,
+              "x_range": [1000, 3500]
+            }
+          },
+          "style": {
+            "point_color": "#A23B72",
+            "line_color": "#2E86AB", 
+            "line_width": 3,
+            "point_size": 8,
+            "grid": true,
+            "grid_color": "#E0E0E0"
+          }
+        }
+      ]
+    },
+    {
+      "scene_id": "gradient_descent_006",
+      "title": "Gradient Descent Algorithm",
+      "duration_s": 95,
+      "operations": [
+        {
+          "type": "text",
+          "content": "Gradient Descent Optimization",
+          "position": "top",
+          "style": {
+            "font_size": 32,
+            "text_color": "#2E86AB",
+            "font_weight": "bold"
+          }
+        },
+        {
+          "type": "text",
+          "content": "Iterative algorithm to find optimal parameters:",
+          "position": "center",
+          "style": {
+            "font_size": 20,
+            "text_color": "#444444"
+          }
+        },
+        {
+          "type": "math",
+          "expression": "\\beta_0 := \\beta_0 - \\alpha \\frac{\\partial MSE}{\\partial \\beta_0}",
+          "position": "center",
+          "style": {
+            "font_size": 24,
+            "text_color": "#A23B72"
+          }
+        },
+        {
+          "type": "math", 
+          "expression": "\\beta_1 := \\beta_1 - \\alpha \\frac{\\partial MSE}{\\partial \\beta_1}",
+          "position": "center",
+          "style": {
+            "font_size": 24,
+            "text_color": "#A23B72"
+          }
+        },
+        {
+          "type": "text",
+          "content": "Where α is the learning rate",
+          "position": "bottom",
+          "style": {
+            "font_size": 18,
+            "text_color": "#666666"
+          }
+        },
+        {
+          "type": "list",
+          "items": [
+            "Initialize parameters randomly",
+            "Calculate cost function",
+            "Compute gradients",
+            "Update parameters",
+            "Repeat until convergence"
+          ],
+          "style": {
+            "bullet_style": "1.",
+            "item_spacing": 8,
+            "font_size": 16,
+            "text_color": "#555555"
+          }
+        }
+      ]
+    },
+    {
+      "scene_id": "evaluation_007",
+      "title": "Model Evaluation Metrics",
+      "duration_s": 70,
+      "operations": [
+        {
+          "type": "text",
+          "content": "Evaluating Linear Regression Performance",
+          "position": "top",
+          "style": {
+            "font_size": 28,
+            "text_color": "#2E86AB",
+            "font_weight": "bold"
+          }
+        },
+        {
+          "type": "text",
+          "content": "R-squared (Coefficient of Determination):",
+          "position": "left",
+          "style": {
+            "font_size": 22,
+            "text_color": "#A23B72",
+            "font_weight": "bold"
+          }
+        },
+        {
+          "type": "math",
+          "expression": "R^2 = 1 - \\frac{SS_{res}}{SS_{tot}} = 1 - \\frac{\\sum(y_i - \\hat{y_i})^2}{\\sum(y_i - \\bar{y})^2}",
+          "position": "center",
+          "style": {
+            "font_size": 20,
+            "text_color": "#000000"
+          }
+        },
+        {
+          "type": "list",
+          "items": [
+            "R² = 1.0: Perfect fit",
+            "R² = 0.8: Good fit (80% variance explained)",
+            "R² = 0.5: Moderate fit",
+            "R² = 0.0: No linear relationship",
+            "R² < 0.0: Model worse than baseline"
+          ],
+          "style": {
+            "bullet_style": "▶",
+            "item_spacing": 8,
+            "font_size": 16,
+            "text_color": "#444444"
+          }
+        }
+      ]
+    },
+    {
+      "scene_id": "applications_008",
+      "title": "Real-World Applications",
+      "duration_s": 85,
+      "operations": [
+        {
+          "type": "text",
+          "content": "Linear Regression in Practice",
+          "position": "top",
+          "style": {
+            "font_size": 32,
+            "text_color": "#2E86AB",
+            "font_weight": "bold"
+          }
+        },
+        {
+          "type": "text",
+          "content": "Common Applications:",
+          "position": "left",
+          "style": {
+            "font_size": 24,
+            "text_color": "#A23B72",
+            "font_weight": "bold"
+          }
+        },
+        {
+          "type": "list",
+          "items": [
+            "📈 Financial forecasting and risk assessment",
+            "🏠 Real estate price prediction",
+            "📊 Sales and marketing analytics",
+            "🔬 Scientific data analysis",
+            "🏭 Quality control in manufacturing",
+            "📱 A/B testing and conversion optimization"
+          ],
+          "style": {
+            "bullet_style": "",
+            "item_spacing": 12,
+            "font_size": 18,
+            "text_color": "#444444"
+          }
+        },
+        {
+          "type": "text",
+          "content": "Linear regression serves as the foundation for more advanced machine learning techniques including polynomial regression, logistic regression, and neural networks.",
+          "position": "bottom",
+          "style": {
+            "font_size": 16,
+            "text_color": "#666666",
+            "max_width": 900,
+            "style": "italic"
+          }
+        }
+      ]
+    },
+    {
+      "scene_id": "summary_009",
+      "title": "Key Takeaways",
+      "duration_s": 55,
+      "operations": [
+        {
+          "type": "text",
+          "content": "Linear Regression Summary",
+          "position": "top",
+          "style": {
+            "font_size": 36,
+            "text_color": "#2E86AB",
+            "font_weight": "bold"
+          }
+        },
+        {
+          "type": "list",
+          "items": [
+            "🎯 Simple yet powerful predictive modeling technique",
+            "📐 Assumes linear relationship between variables",
+            "🎢 Minimizes Mean Squared Error (MSE)",
+            "📊 Provides interpretable coefficients",
+            "⚡ Fast training and prediction",
+            "🏗️ Foundation for advanced ML algorithms"
+          ],
+          "style": {
+            "bullet_style": "",
+            "item_spacing": 15,
+            "font_size": 20,
+            "text_color": "#444444"
+          }
+        },
+        {
+          "type": "text",
+          "content": "Next: Polynomial Regression and Regularization Techniques",
+          "position": "bottom",
+          "style": {
+            "font_size": 18,
+            "text_color": "#A23B72",
+            "font_weight": "bold"
+          }
+        }
+      ]
+    }
+  ],
+  "style_pack": {
+    "name": "educational_modern",
+    "version": "1.2",
+    "fonts": {
+      "primary": "Inter",
+      "secondary": "Source Code Pro",
+      "math": "Latin Modern Math"
+    },
+    "colors": {
+      "primary": "#2E86AB",
+      "secondary": "#A23B72", 
+      "accent": "#F18F01",
+      "background": "#FFFFFF",
+      "text": "#333333",
+      "muted": "#666666"
+    },
+    "animations": {
+      "default_duration": 1.0,
+      "fade_in_duration": 0.8,
+      "fade_out_duration": 0.6,
+      "slide_duration": 1.2
+    },
+    "layout": {
+      "margins": {
+        "top": 80,
+        "bottom": 80,
+        "left": 100,
+        "right": 100
+      },
+      "spacing": {
+        "line_height": 1.4,
+        "paragraph_spacing": 20,
+        "section_spacing": 40
+      }
+    }
+  },
+  "rendering_config": {
+    "resolution": "1920x1080",
+    "fps": 30,
+    "quality": "high",
+    "background_color": "#FFFFFF",
+    "total_estimated_duration_s": 645
+  }
+}

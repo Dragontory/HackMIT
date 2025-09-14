@@ -1,0 +1,53 @@
+{
+  "version": "1.0",
+  "name": "dark_high_contrast",
+  "description": "Dark theme with high contrast for accessibility and modern appearance",
+  "typography": {
+    "title_font": ["Roboto", "Arial", "Helvetica"],
+    "body_font": ["Roboto", "Arial", "Helvetica"],
+    "math_font": ["Computer Modern", "Latin Modern Math", "STIX"],
+    "title_scale": 1.0,
+    "subtitle_scale": 0.8,
+    "text_scale": 0.85,
+    "eq_scale": 1.0
+  },
+  "colors": {
+    "primary_text": "#FFFFFF",
+    "secondary_text": "#D1D5DB",
+    "accent": "#60A5FA",
+    "background": "#000000",
+    "highlight": "#FCD34D",
+    "warning": "#F87171",
+    "success": "#34D399",
+    "grid": "#6B7280"
+  },
+  "layout": {
+    "margins": {
+      "top": 0.8,
+      "right": 0.8,
+      "bottom": 0.8,
+      "left": 0.8
+    },
+    "title_position": "top",
+    "max_line_length_chars": 100,
+    "bullet_leading": 0.6
+  },
+  "graph_defaults": {
+    "axes": {
+      "include_numbers": true,
+      "stroke_width": 2.5,
+      "color": "#FFFFFF"
+    },
+    "x_range": [-5, 5, 1],
+    "y_range": [-2, 8, 1]
+  },
+  "camera3d": {
+    "elevation": 30.0,
+    "azimuth": 60.0,
+    "distance": 8.0
+  },
+  "animations": {
+    "default_wait_s": 0.3,
+    "write_speed": 0.8
+  }
+}

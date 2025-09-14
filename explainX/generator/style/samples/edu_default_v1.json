@@ -1,0 +1,53 @@
+{
+  "version": "1.0",
+  "name": "edu_default_v1",
+  "description": "Default educational style pack with clean, professional appearance",
+  "typography": {
+    "title_font": ["Inter", "Noto Sans", "DejaVu Sans"],
+    "body_font": ["Inter", "Noto Sans", "DejaVu Sans"],
+    "math_font": ["Computer Modern", "Latin Modern Math"],
+    "title_scale": 0.9,
+    "subtitle_scale": 0.7,
+    "text_scale": 0.8,
+    "eq_scale": 0.95
+  },
+  "colors": {
+    "primary_text": "#111111",
+    "secondary_text": "#374151",
+    "accent": "#2563EB",
+    "background": "#FFFFFF",
+    "highlight": "#F59E0B",
+    "warning": "#DC2626",
+    "success": "#16A34A",
+    "grid": "#9CA3AF"
+  },
+  "layout": {
+    "margins": {
+      "top": 0.6,
+      "right": 0.6,
+      "bottom": 0.6,
+      "left": 0.7
+    },
+    "title_position": "top",
+    "max_line_length_chars": 120,
+    "bullet_leading": 0.5
+  },
+  "graph_defaults": {
+    "axes": {
+      "include_numbers": false,
+      "stroke_width": 2,
+      "color": "#111111"
+    },
+    "x_range": [-3, 3, 1],
+    "y_range": [-1, 9, 1]
+  },
+  "camera3d": {
+    "elevation": 45.0,
+    "azimuth": 45.0,
+    "distance": 6.0
+  },
+  "animations": {
+    "default_wait_s": 0.2,
+    "write_speed": 1.0
+  }
+}
