@@ -1,5 +1,15 @@
 import React, { useState, useCallback } from "react";
 
+// Import all 8 faces for use
+import face1 from "../assets/face1.png";
+import face2 from "../assets/face2.png";
+import face3 from "../assets/face3.png";
+import face4 from "../assets/face4.png";
+import face5 from "../assets/face5.png";
+import face6 from "../assets/face6.png";
+import face7 from "../assets/face7.png";
+import face8 from "../assets/face8.png";
+
 const UploadIcon = () => (
   <svg
     className="w-16 h-16 text-slate-500 mb-4"
@@ -31,6 +41,7 @@ const Uploader = () => {
   const [goDeeper, setGoDeeper] = useState(false);
   const [extractedText, setExtractedText] = useState("");
   const [imageHashes, setImageHashes] = useState([]);
+  const [selectedVoice, setSelectedVoice] = useState(null); // State for voice selection
   const [uploading, setUploading] = useState(false);
 
   const handleFile = useCallback((file) => {
@@ -68,16 +79,17 @@ const Uploader = () => {
   };
 
   const handleGenerate = async () => {
-    if (uploadedFile) {
+    if (uploadedFile && selectedVoice !== null) {
       setIsGenerating(true);
       setError("");
       setUploading(true);
       console.log("Generating video for:", uploadedFile.name);
-      console.log("Go Deeper toggle is:", goDeeper);
+      console.log("Selected voice ID:", selectedVoice);
 
       // Create FormData and send to the backend API
       const formData = new FormData();
       formData.append("file", uploadedFile);
+      formData.append("voice", selectedVoice); // Send selected voice to backend
 
       try {
         // Send file to backend API
@@ -105,6 +117,10 @@ const Uploader = () => {
   const dropZoneClasses = `bg-slate-800 border-2 border-dashed rounded-2xl p-8 text-center cursor-pointer transition-all duration-300 ${
     isDragOver ? "border-sky-500 bg-slate-700" : "border-slate-600"
   } ${error ? "border-red-500" : ""}`;
+
+  const voiceNames = [
+    "Alice", "Bob", "Charlie", "Dana", "Eva", "Frank", "Grace", "Hank"
+  ];
 
   return (
     <div className="w-full max-w-2xl">
@@ -153,6 +169,48 @@ const Uploader = () => {
         )}
       </div>
 
+      {/* Voice Selection Section */}
+      <div className="mt-8">
+        <h3 className="font-bold text-lg text-white">Choose Your Voice</h3>
+        <p className="text-slate-400 text-sm">Pick a voice for the video narration.</p>
+        <div className="grid grid-cols-4 gap-6 mt-4">
+          {[
+            face1,
+            face2,
+            face3,
+            face4,
+            face5,
+            face6,
+            face7,
+            face8,
+          ].map((face, index) => (
+            <div
+              key={index}
+              className={`cursor-pointer p-4 rounded-lg transition-all duration-300 ${
+                selectedVoice === index
+                  ? "border-4 border-blue-500"
+                  : "border"
+              }`}
+              onClick={() => {
+                // Toggle selection on click (deselect if already selected)
+                setSelectedVoice(selectedVoice === index ? null : index);
+              }}
+            >
+              <div className="relative">
+                <img
+                  src={face}
+                  alt={`Voice ${index + 1}`}
+                  className="w-full h-full object-contain rounded-xl"
+                />
+                <div className="text-center mt-2 text-slate-300 font-semibold">
+                  {voiceNames[index]}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* Go Deeper Toggle */}
       <div className="mt-8 bg-slate-800 border border-slate-700 rounded-xl p-6 flex items-center justify-between">
         <div>
@@ -184,7 +242,7 @@ const Uploader = () => {
           id="generate-button"
           onClick={handleGenerate}
           className="w-full main-button bg-sky-500 hover:bg-sky-600 text-white font-bold py-4 px-10 rounded-full text-lg shadow-lg disabled:bg-slate-600 disabled:shadow-none disabled:cursor-not-allowed"
-          disabled={!uploadedFile || isGenerating}
+          disabled={!uploadedFile || isGenerating || selectedVoice === null}
         >
           {isGenerating ? "Generating..." : "Generate Video"}
         </button>
