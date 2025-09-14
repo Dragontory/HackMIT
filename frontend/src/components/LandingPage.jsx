@@ -175,35 +175,53 @@ const LandingPage = ({ onTryNow }) => {
             <p className="mt-4 text-slate-400">A quick look at ClarifY turning notes into a video.</p>
           </div>
 
-          <div className="relative">
-            {/* Display GIF with smoother transitions */}
-            <div className="transition-all duration-500 ease-in-out">
-              <img
-                src={gifs[currentGifIndex]}
-                alt="demo gif"
-                className="w-full h-auto rounded-xl"
-              />
+          <div className="relative flex justify-center items-center">
+            {/* Container for both GIFs */}
+            <div className="relative w-[80%] h-[450px] flex justify-center items-center">
+              {/* GIF 1 */}
+              <div
+                className={`absolute w-full h-full transition-opacity duration-500 ease-in-out ${
+                  currentGifIndex === 0 ? 'opacity-100' : 'opacity-0'
+                }`}
+              >
+                <img
+                  src={gifs[0]}
+                  alt="demo gif 1"
+                  className="w-full h-full object-contain rounded-xl"
+                />
+              </div>
+
+              {/* GIF 2 */}
+              <div
+                className={`absolute w-full h-full transition-opacity duration-500 ease-in-out ${
+                  currentGifIndex === 1 ? 'opacity-100' : 'opacity-0'
+                }`}
+              >
+                <img
+                  src={gifs[1]}
+                  alt="demo gif 2"
+                  className="w-full h-full object-contain rounded-xl"
+                />
+              </div>
             </div>
 
-            {/* Navigation arrows */}
-            <div className="absolute top-1/2 left-0 right-0 flex justify-between px-4">
-              <button
-                onClick={goToPrevious}
-                className="bg-black/50 text-white p-3 rounded-full transform hover:scale-110 transition duration-300"
-              >
-                &#8592;
-              </button>
-              <button
-                onClick={goToNext}
-                className="bg-black/50 text-white p-3 rounded-full transform hover:scale-110 transition duration-300"
-              >
-                &#8594;
-              </button>
-            </div>
+            {/* Navigation arrows positioned outside the display */}
+            <button
+              onClick={goToPrevious}
+              className="absolute top-1/2 left-25 transform -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:scale-110 transition duration-300 z-10"
+            >
+              &#8592;
+            </button>
+            <button
+              onClick={goToNext}
+              className="absolute top-1/2 right-25 transform -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:scale-110 transition duration-300 z-10"
+            >
+              &#8594;
+            </button>
           </div>
 
           {/* Dots for navigation */}
-          <div className="flex justify-center gap-2 mt-4">
+          <div className="flex justify-center gap-2 mt-4 z-20">
             {gifs.map((_, index) => (
               <div
                 key={index}
