@@ -10,6 +10,18 @@ import face6 from "../assets/face6.png";
 import face7 from "../assets/face7.png";
 import face8 from "../assets/face8.png";
 
+// Loading Spinner Component
+const LoadingSpinner = () => (
+  <div className="flex flex-col items-center justify-center">
+    <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-sky-500 mb-6"></div>
+    <div className="text-center">
+      <h3 className="text-xl font-semibold text-white mb-2">Generating Your Video</h3>
+      <p className="text-lg text-sky-400 font-medium">Estimated Time: 25 minutes</p>
+      <p className="text-sm text-slate-400 mt-2">Processing and audio generation in progress...</p>
+    </div>
+  </div>
+);
+
 const UploadIcon = () => (
   <svg
     className="w-16 h-16 text-slate-500 mb-4"
@@ -141,13 +153,20 @@ const Uploader = () => {
 
   return (
     <div className="w-full max-w-2xl">
-      <div
-        className={dropZoneClasses}
-        onClick={() => document.getElementById("file-input").click()}
-        onDragOver={onDragOver}
-        onDragLeave={onDragLeave}
-        onDrop={onDrop}
-      >
+      {/* Show loading screen when generating */}
+      {isGenerating ? (
+        <div className="bg-slate-800 border-2 border-slate-600 rounded-2xl p-12 text-center">
+          <LoadingSpinner />
+        </div>
+      ) : (
+        <>
+          <div
+            className={dropZoneClasses}
+            onClick={() => document.getElementById("file-input").click()}
+            onDragOver={onDragOver}
+            onDragLeave={onDragLeave}
+            onDrop={onDrop}
+          >
         <input
           type="file"
           id="file-input"
@@ -174,7 +193,7 @@ const Uploader = () => {
               {uploadedFile.name}
             </p>
             <p className="text-slate-400 mt-2" id="file-status">
-              {isGenerating ? "Uploading and processing..." : "Ready to generate!"}
+              Ready to generate!
             </p>
           </div>
         )}
@@ -251,7 +270,7 @@ const Uploader = () => {
           className="w-full main-button bg-sky-500 hover:bg-sky-600 text-white font-bold py-4 px-10 rounded-full text-lg shadow-lg disabled:bg-slate-600 disabled:shadow-none disabled:cursor-not-allowed"
           disabled={!uploadedFile || isGenerating || !selectedVoiceId}
         >
-          {isGenerating ? "Generating..." : "Generate Video"}
+          Generate Video
         </button>
       </div>
 
@@ -283,6 +302,8 @@ const Uploader = () => {
             ))}
           </div>
         </div>
+      )}
+        </>
       )}
     </div>
   );
