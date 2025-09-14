@@ -2,12 +2,11 @@ import React from 'react';
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
 
 const data = [
-  { day: 'Day 0', text: 100, clarify: 100 },
-  { day: 'Day 2', text: 72, clarify: 88 },
-  { day: 'Day 4', text: 54, clarify: 80 },
-  { day: 'Day 6', text: 41, clarify: 74 },
-  { day: 'Day 8', text: 31, clarify: 69 },
-  { day: 'Day 10', text: 24, clarify: 65 },
+  { day: 'Day 0',  text: 100, clarify: 100 },
+  { day: 'Day 1',  text: 40,  clarify: 85  }, // Sharp drop for standard notes
+  { day: 'Day 3',  text: 30,  clarify: 75  },
+  { day: 'Day 7',  text: 22,  clarify: 68  },
+  { day: 'Day 14', text: 18,  clarify: 60  },
 ];
 
 // Helper function to capitalize only the first and last letters

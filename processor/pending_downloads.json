@@ -1,0 +1,26 @@
+[
+  {
+    "operation_name": "models/veo-3.0-generate-001/operations/akk4gyvh36ce",
+    "educational_context": "Comprehensive Notes: Summarizing Data II Introduction to Data Analysis Welcome to our detailed exploration of data summarization techniques! In this lesson, we'll build a strong foundation for understanding how to effectively describe, visualize, and analyze different types of data. These skills are fundamental to statistical analysis and data science. Understanding Datasets What is a Dataset? A...",
+    "created_at": "2025-09-14T09:47:10.495510",
+    "check_after": 1757858530.495528,
+    "wait_minutes": 15,
+    "status": "pending"
+  },
+  {
+    "operation_name": "models/veo-3.0-generate-001/operations/5p7rhf9hu8s2",
+    "educational_context": "Comprehensive Notes: Summarizing Data II Introduction to Data Analysis Welcome to our detailed exploration of data summarization techniques! In this lesson, we'll build a strong foundation for understanding how to effectively describe, visualize, and analyze different types of data. These skills are fundamental to statistical analysis and data science. Understanding Datasets What is a Dataset? A...",
+    "created_at": "2025-09-14T09:47:50.737747",
+    "check_after": 1757858570.737764,
+    "wait_minutes": 15,
+    "status": "pending"
+  },
+  {
+    "operation_name": "models/veo-3.0-generate-001/operations/65tqvx9b9vfx",
+    "educational_context": "NEURAL NETWORKS AND DEEP LEARNING Comprehensive Educational Notes 1. INTRODUCTION TO NEURAL NETWORKS 1.1 Biological Inspiration Neural networks are computational systems modeled after the human brain's structure and function Key biological parallel: Just as biological neurons receive, process, and transmit electrochemical signals, artificial neurons process numerical inputs through mathematical...",
+    "created_at": "2025-09-14T10:11:40.090460",
+    "check_after": 1757860000.090474,
+    "wait_minutes": 15,
+    "status": "pending"
+  }
+]
