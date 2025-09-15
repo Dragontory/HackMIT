@@ -1,0 +1,9 @@
+fastapi[all] 
+uvicorn[standard]
+python-multipart 
+PyMuPDF 
+Pillow 
+requests 
+reportlab
+imagehash
+modal

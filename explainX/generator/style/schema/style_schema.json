@@ -1,0 +1,310 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://explainx.com/schemas/style-pack.json",
+  "title": "Style Pack Schema",
+  "description": "JSON schema for ExplainX style pack configuration files",
+  "type": "object",
+  "required": ["version", "name", "colors"],
+  "properties": {
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+$",
+      "description": "Style pack version in semantic versioning format"
+    },
+    "name": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_]+$",
+      "minLength": 1,
+      "maxLength": 50,
+      "description": "Unique identifier for the style pack"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 200,
+      "description": "Optional description of the style pack"
+    },
+    "typography": {
+      "type": "object",
+      "properties": {
+        "title_font": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50
+          },
+          "minItems": 1,
+          "maxItems": 5,
+          "default": ["Inter", "Noto Sans", "DejaVu Sans"],
+          "description": "Ordered list of font families for titles (with fallbacks)"
+        },
+        "body_font": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50
+          },
+          "minItems": 1,
+          "maxItems": 5,
+          "default": ["Inter", "Noto Sans", "DejaVu Sans"],
+          "description": "Ordered list of font families for body text (with fallbacks)"
+        },
+        "math_font": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50
+          },
+          "minItems": 1,
+          "maxItems": 5,
+          "default": ["Computer Modern", "Latin Modern Math"],
+          "description": "Ordered list of font families for mathematical expressions"
+        },
+        "title_scale": {
+          "type": "number",
+          "minimum": 0.4,
+          "maximum": 2.0,
+          "default": 0.9,
+          "description": "Scale factor for title text size"
+        },
+        "subtitle_scale": {
+          "type": "number",
+          "minimum": 0.4,
+          "maximum": 2.0,
+          "default": 0.7,
+          "description": "Scale factor for subtitle text size"
+        },
+        "text_scale": {
+          "type": "number",
+          "minimum": 0.4,
+          "maximum": 2.0,
+          "default": 0.8,
+          "description": "Scale factor for regular text size"
+        },
+        "eq_scale": {
+          "type": "number",
+          "minimum": 0.4,
+          "maximum": 2.0,
+          "default": 0.95,
+          "description": "Scale factor for equation text size"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Typography settings including fonts and scaling"
+    },
+    "colors": {
+      "type": "object",
+      "required": ["primary_text", "background", "accent"],
+      "properties": {
+        "primary_text": {
+          "type": "string",
+          "pattern": "^#[0-9A-Fa-f]{6}$",
+          "description": "Primary text color in hex format"
+        },
+        "secondary_text": {
+          "type": "string",
+          "pattern": "^#[0-9A-Fa-f]{6}$",
+          "default": "#374151",
+          "description": "Secondary text color in hex format"
+        },
+        "accent": {
+          "type": "string",
+          "pattern": "^#[0-9A-Fa-f]{6}$",
+          "description": "Accent color for highlights and emphasis"
+        },
+        "background": {
+          "type": "string",
+          "pattern": "^#[0-9A-Fa-f]{6}$",
+          "description": "Background color in hex format"
+        },
+        "highlight": {
+          "type": "string",
+          "pattern": "^#[0-9A-Fa-f]{6}$",
+          "default": "#F59E0B",
+          "description": "Highlight color for important elements"
+        },
+        "warning": {
+          "type": "string",
+          "pattern": "^#[0-9A-Fa-f]{6}$",
+          "default": "#DC2626",
+          "description": "Warning color for error states"
+        },
+        "success": {
+          "type": "string",
+          "pattern": "^#[0-9A-Fa-f]{6}$",
+          "default": "#16A34A",
+          "description": "Success color for positive states"
+        },
+        "grid": {
+          "type": "string",
+          "pattern": "^#[0-9A-Fa-f]{6}$",
+          "default": "#9CA3AF",
+          "description": "Grid and auxiliary line color"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Color palette for all visual elements"
+    },
+    "layout": {
+      "type": "object",
+      "properties": {
+        "margins": {
+          "type": "object",
+          "properties": {
+            "top": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 2.5,
+              "default": 0.6,
+              "description": "Top margin in Manim scene units"
+            },
+            "right": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 2.5,
+              "default": 0.6,
+              "description": "Right margin in Manim scene units"
+            },
+            "bottom": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 2.5,
+              "default": 0.6,
+              "description": "Bottom margin in Manim scene units"
+            },
+            "left": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 2.5,
+              "default": 0.7,
+              "description": "Left margin in Manim scene units"
+            }
+          },
+          "additionalProperties": false,
+          "default": {"top": 0.6, "right": 0.6, "bottom": 0.6, "left": 0.7}
+        },
+        "title_position": {
+          "type": "string",
+          "enum": ["top", "center", "bottom"],
+          "default": "top",
+          "description": "Default position for title elements"
+        },
+        "max_line_length_chars": {
+          "type": "integer",
+          "minimum": 50,
+          "maximum": 200,
+          "default": 120,
+          "description": "Maximum line length in characters for text wrapping"
+        },
+        "bullet_leading": {
+          "type": "number",
+          "minimum": 0.1,
+          "maximum": 2.0,
+          "default": 0.5,
+          "description": "Line spacing factor for bullet lists"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Layout and positioning settings"
+    },
+    "graph_defaults": {
+      "type": "object",
+      "properties": {
+        "axes": {
+          "type": "object",
+          "properties": {
+            "include_numbers": {
+              "type": "boolean",
+              "default": false,
+              "description": "Whether to show numbers on axes by default"
+            },
+            "stroke_width": {
+              "type": "number",
+              "minimum": 0.5,
+              "maximum": 10.0,
+              "default": 2,
+              "description": "Default stroke width for axes"
+            },
+            "color": {
+              "type": "string",
+              "pattern": "^#[0-9A-Fa-f]{6}$",
+              "default": "#111111",
+              "description": "Default color for axes"
+            }
+          },
+          "additionalProperties": false
+        },
+        "x_range": {
+          "type": "array",
+          "items": {"type": "number"},
+          "minItems": 3,
+          "maxItems": 3,
+          "default": [-3, 3, 1],
+          "description": "Default x-axis range as [min, max, step]"
+        },
+        "y_range": {
+          "type": "array",
+          "items": {"type": "number"},
+          "minItems": 3,
+          "maxItems": 3,
+          "default": [-1, 9, 1],
+          "description": "Default y-axis range as [min, max, step]"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Default settings for graphs and plots"
+    },
+    "camera3d": {
+      "type": "object",
+      "properties": {
+        "elevation": {
+          "type": "number",
+          "minimum": -90,
+          "maximum": 90,
+          "default": 45.0,
+          "description": "Default camera elevation angle in degrees"
+        },
+        "azimuth": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 360,
+          "default": 45.0,
+          "description": "Default camera azimuth angle in degrees"
+        },
+        "distance": {
+          "type": "number",
+          "minimum": 1.0,
+          "maximum": 20.0,
+          "default": 6.0,
+          "description": "Default camera distance from origin"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Default 3D camera settings"
+    },
+    "animations": {
+      "type": "object",
+      "properties": {
+        "default_wait_s": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 5.0,
+          "default": 0.2,
+          "description": "Default wait time between operations in seconds"
+        },
+        "write_speed": {
+          "type": "number",
+          "minimum": 0.1,
+          "maximum": 3.0,
+          "default": 1.0,
+          "description": "Speed factor for write animations"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Animation timing and speed settings"
+    }
+  },
+  "additionalProperties": false
+}

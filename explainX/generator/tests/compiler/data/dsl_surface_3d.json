@@ -1,0 +1,29 @@
+{
+    "scene_id": "sec_surf",
+    "dimension": "3d",
+    "timeline": [
+        {
+            "op": "title",
+            "text": "3D Surface Visualization",
+            "pos": "top"
+        },
+        {
+            "op": "surface3d", 
+            "fn": "sin(u)*cos(v)",
+            "u_min": -3,
+            "u_max": 3,
+            "v_min": -3, 
+            "v_max": 3
+        },
+        {
+            "op": "camera_move",
+            "phi": 60,
+            "theta": 30,
+            "distance": 8.0
+        },
+        {
+            "op": "pause",
+            "seconds": 2.0
+        }
+    ]
+}

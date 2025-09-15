@@ -1,0 +1,112 @@
+Manim Community v0.18.1
+
+[09/14/25 06:28:32] INFO     Animation 0 : Using cached     cairo_renderer.py:88
+                             data (hash :                                       
+                             1185818338_918008538_223132457                     
+                             )                                                  
+                    INFO     Animation 1 : Using cached     cairo_renderer.py:88
+                             data (hash :                                       
+                             624642324_1141282389_335696391                     
+                             5)                                                 
+                    INFO     Animation 2 : Using cached     cairo_renderer.py:88
+                             data (hash :                                       
+                             624642324_4072964968_412327630                     
+                             )                                                  
+                    INFO     Animation 3 : Using cached     cairo_renderer.py:88
+                             data (hash :                                       
+                             624642324_4207674275_107148416                     
+                             9)                                                 
+                    INFO     Animation 4 : Using cached     cairo_renderer.py:88
+                             data (hash :                                       
+                             624642324_55720582_758497372)                      
+                    INFO     Animation 5 : Using cached     cairo_renderer.py:88
+                             data (hash :                                       
+                             624642324_285196401_1195970471                     
+                             )                                                  
+[09/14/25 06:28:33] INFO     Animation 6 : Using cached     cairo_renderer.py:88
+                             data (hash :                                       
+                             624642324_4207674275_258671700                     
+                             9)                                                 
+                    INFO     Animation 7 : Using cached     cairo_renderer.py:88
+                             data (hash :                                       
+                             624642324_557454604_3145836726                     
+                             )                                                  
+                    INFO     Animation 8 : Using cached     cairo_renderer.py:88
+                             data (hash :                                       
+                             624642324_1565348774_401467554                     
+                             3)                                                 
+                    INFO     Animation 9 : Using cached     cairo_renderer.py:88
+                             data (hash :                                       
+                             624642324_3893523580_253779663                     
+                             7)                                                 
+                    INFO     Animation 10 : Using cached    cairo_renderer.py:88
+                             data (hash :                                       
+                             624642324_1540346847_949648007                     
+                             )                                                  
+                    INFO     Animation 11 : Using cached    cairo_renderer.py:88
+                             data (hash :                                       
+                             624642324_1141282389_246838920                     
+                             4)                                                 
+
+
+
+Animation 0: Write(Text('Attention Mechanisms in Neural Machine Translation')):   0%|          | 0/1 [00:00<?, ?it/s]
+                                                                                                                     
+
+Animation 2: FadeOut(Text('Attention Mechanisms in Neural Machine Translation')):   0%|          | 0/1 [00:00<?, ?it/s]
+                                                                                                                       
+
+Animation 4: Write(Text('Vanilla Encoder-Decoder NMT')):   0%|          | 0/1 [00:00<?, ?it/s]
+                                                                                              
+
+Animation 5: _MethodAnimation(Text('Vanilla Encoder-Decoder NMT')):   0%|          | 0/1 [00:00<?, ?it/s]
+                                                                                                         
+
+Animation 7: _MethodAnimation(Text('Vanilla Encoder-Decoder NMT')):   0%|          | 0/1 [00:00<?, ?it/s]
+                                                                                                         
+
+Animation 8: Create(Rectangle), etc.:   0%|          | 0/1 [00:00<?, ?it/s]
+                                                                           
+
+Animation 9: Write(Text('The cat sat on the mat')), etc.:   0%|          | 0/1 [00:00<?, ?it/s]
+                                                                                               
+
+Animation 10: Write(Text("Le chat s'assit sur le tapis")), etc.:   0%|          | 0/1 [00:00<?, ?it/s]
+                                                                                                      
+╭───────────────────── Traceback (most recent call last) ──────────────────────╮
+│ /Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packa │
+│ ges/manim/cli/render/commands.py:120 in render                               │
+│                                                                              │
+│   117 │   │   │   try:                                                       │
+│   118 │   │   │   │   with tempconfig({}):                                   │
+│   119 │   │   │   │   │   scene = SceneClass()                               │
+│ ❱ 120 │   │   │   │   │   scene.render()                                     │
+│   121 │   │   │   except Exception:                                          │
+│   122 │   │   │   │   error_console.print_exception()                        │
+│   123 │   │   │   │   sys.exit(1)                                            │
+│                                                                              │
+│ /Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packa │
+│ ges/manim/scene/scene.py:229 in render                                       │
+│                                                                              │
+│    226 │   │   """                                                           │
+│    227 │   │   self.setup()                                                  │
+│    228 │   │   try:                                                          │
+│ ❱  229 │   │   │   self.construct()                                          │
+│    230 │   │   except EndSceneEarlyException:                                │
+│    231 │   │   │   pass                                                      │
+│    232 │   │   except RerunSceneException as e:                              │
+│                                                                              │
+│ /var/folders/cd/q38ms7lj299f5f825l9mq8m80000gn/T/tmpj3zxo2r3.py:57 in        │
+│ construct                                                                    │
+│                                                                              │
+│    54 │   │   self.wait(2)                                                   │
+│    55 │   │                                                                  │
+│    56 │   │   # Highlight the bottleneck problem                             │
+│ ❱  57 │   │   self.play(Create(bottleneck_highlight), Write(bottleneck_text) │
+│    58 │   │   self.wait(0.8)                                                 │
+│    59 │   │   bottleneck_text = Text("Bottleneck Problem", color=YELLOW, fon │
+│    60 │   │   self.play(Create(bottleneck_highlight), Write(bottleneck_text) │
+╰──────────────────────────────────────────────────────────────────────────────╯
+NameError: name 'bottleneck_highlight' is not defined
+
+ERROR conda.cli.main_run:execute(125): `conda run manim /var/folders/cd/q38ms7lj299f5f825l9mq8m80000gn/T/tmpj3zxo2r3.py AttentionMechanismsInNMT -pql` failed. (See above for error)

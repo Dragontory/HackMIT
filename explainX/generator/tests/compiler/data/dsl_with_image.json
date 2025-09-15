@@ -1,0 +1,27 @@
+{
+    "scene_id": "img_demo",
+    "dimension": "2d", 
+    "timeline": [
+        {
+            "op": "title",
+            "text": "Image Integration Demo",
+            "pos": "top"
+        },
+        {
+            "op": "img",
+            "ref": "sha256:abc123def456789",
+            "pos": "center",
+            "width": 6.0,
+            "anim": "fade"
+        },
+        {
+            "op": "text", 
+            "text": "Assets are resolved safely through the resolver interface",
+            "pos": "bottom"
+        },
+        {
+            "op": "pause",
+            "seconds": 3.0
+        }
+    ]
+}

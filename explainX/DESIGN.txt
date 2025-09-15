@@ -1,0 +1,60 @@
+🎯 EXPLAINX SYSTEM DESIGN - COMPLETE IMPLEMENTATION FLOW
+═══════════════════════════════════════════════════════════════
+
+┌─────────────┐    1. Upload    ┌──────────────┐    2. Extract    ┌─────────────┐
+│   Student   │ ────────────────→│ PDF Handler  │ ────────────────→│ Text Content│
+│             │     PDF Notes   │              │     Text/Images  │             │
+└─────────────┘                 └──────────────┘                  └─────────────┘
+                                                                          │
+                                                                          │ 3. Structure
+                                                                          ▼
+┌─────────────┐    4. Generate   ┌──────────────┐    5. Validate   ┌─────────────┐
+│Scene Plan   │ ◀────────────────│   T3: GPT-5  │ ◀────────────────│   T1: JSON  │
+│(Multi-Scene)│    Scene DSL     │ Codegen Agent│    Schema Check  │Schema Validator│
+└─────────────┘                  └──────────────┘                  └─────────────┘
+      │                                   │                               ▲
+      │                                   │ 6. Apply                      │
+      │                                   ▼                               │
+      │                          ┌──────────────┐    7. Load & Validate   │
+      │                          │  T2: Style   │ ────────────────────────┘
+      │                          │Pack Provider │    Style Consistency
+      │                          └──────────────┘
+      │ 8. Compile Each Scene
+      ▼
+┌─────────────┐    9. Transform  ┌──────────────┐   10. Generate    ┌─────────────┐
+│T4: Compiler │ ────────────────→│   Enhanced   │ ────────────────→│ Manim Python│
+│   Engine    │   DSL → Python   │Scene Emitter │   Source Code    │Source Files │
+└─────────────┘                  └──────────────┘                  └─────────────┘
+                                                                          │
+                                                                          │ 11. Validate
+                                                                          ▼
+┌─────────────┐   12. Static     ┌──────────────┐   13. Safety     ┌─────────────┐
+│T5.1: Schema │ ◀────────────────│ T5: Validator│ ────────────────→│T5.2: Source │
+│& Style Check│    Validation    │   Pipeline   │   Scan Code     │Safety Scanner│
+└─────────────┘                  └──────────────┘                  └─────────────┘
+                                          │                               │
+                                          │ 14. If Safe                   │ 15. Block
+                                          ▼                               ▼     Unsafe
+┌─────────────┐   16. Execute    ┌──────────────┐   17. Generate   ┌─────────────┐
+│T5.3: Sandbox│ ◀────────────────│/tmp/job_vid/ │ ────────────────→│ MP4 Preview │
+│   Runner    │   Manim Preview  │scene_id/     │   Artifacts     │& First Frame│
+└─────────────┘                  └──────────────┘                  └─────────────┘
+      │                                  │
+      │ 18. Resource Limits              │ 19. Structured
+      │ (25s, 1.5GB)                     │ Temp Directory
+      ▼                                  ▼
+┌─────────────┐   20. Monitor    ┌──────────────┐   21. Output     ┌─────────────┐
+│Process Limits│ ────────────────→│   main.py    │ ────────────────→│ artifacts/  │
+│& Sandboxing │   Execution      │  manim.cfg   │   Preview Files  │videos/     │
+└─────────────┘                  └──────────────┘                  │images/     │
+                                                                   └─────────────┘
+                                          │
+                                          │ 22. Quality Check
+                                          ▼
+┌─────────────┐   23. Success    ┌──────────────┐   24. Repair     ┌─────────────┐
+│Final Preview│ ◀────────────────│Error Reporter│ ────────────────→│  T3: Repair │
+│ Artifacts   │    or Errors     │& Structured  │   Loop (Future) │    Agent    │
+└─────────────┘                  │   Issues     │                  │  (Planned)  │
+                                 └──────────────┘                  └─────────────┘
+
+═══════════════════════════════════════════════════════════════

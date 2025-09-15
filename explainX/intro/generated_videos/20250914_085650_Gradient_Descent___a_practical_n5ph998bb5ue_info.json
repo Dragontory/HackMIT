@@ -1,0 +1,16 @@
+{
+  "task_id": "n5ph998bb5ue",
+  "operation_name": "models/veo-3.0-generate-001/operations/n5ph998bb5ue",
+  "educational_context": "Gradient Descent \u2014 a practical, detailed guide\n\nGradient descent is the workhorse of modern optimization. If you train a neural network, fit a logistic regression, or tune a large language model, you are moving parameters by following gradients of a loss function. This guide gives you a careful, practitioner-friendly walk through the core ideas, variants you will actually use, when each makes sense, and the math that explains why they work.",
+  "downloaded_at": "2025-09-14T08:56:51.310433",
+  "file_size_mb": 1.39,
+  "video_path": "generated_videos/20250914_085650_Gradient_Descent___a_practical_n5ph998bb5ue.mp4",
+  "original_task": {
+    "operation_name": "models/veo-3.0-generate-001/operations/n5ph998bb5ue",
+    "educational_context": "Gradient Descent \u2014 a practical, detailed guide\n\nGradient descent is the workhorse of modern optimization. If you train a neural network, fit a logistic regression, or tune a large language model, you are moving parameters by following gradients of a loss function. This guide gives you a careful, practitioner-friendly walk through the core ideas, variants you will actually use, when each makes sense, and the math that explains why they work.",
+    "created_at": "2025-09-14T08:41:41.663447",
+    "check_after": 1757854601.663467,
+    "wait_minutes": 15,
+    "status": "pending"
+  }
+}
